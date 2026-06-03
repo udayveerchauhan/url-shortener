@@ -26,6 +26,4 @@ Route::middleware('auth')->group(function () {
         ->only(['index', 'create', 'store']);
 });
 
-Route::get('/s/{code}', function () {
-    return response()->json(['message' => 'Public resolution disabled'], 403);
-})->name('short_urls.resolve');
+Route::get('/s/{code}', [ShortUrlController::class, 'redirect'])->middleware('auth')->name('short-urls.redirect');

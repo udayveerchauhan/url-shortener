@@ -1,4 +1,4 @@
-﻿# Laravel URL Shortener Service
+# Laravel URL Shortener Service
 
 A company-aware URL shortening service built using Laravel 11, MySQL, Breeze-style authentication, and Spatie Laravel Permission.
 
@@ -38,15 +38,7 @@ php artisan key:generate
 
 4. Configure your `.env` database values for MySQL
 
-Go to Bitly (https://bitly.com/) and sign in (or create an account).
-Open your account settings.
-Navigate to the API or Developer section.
-Create a new access token (or generate a Generic Access Token if available).
-Copy the token.
-
 ```dotenv
-BITLY_API_KEY=paste_generated_bitly_token
-
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -100,6 +92,6 @@ php artisan test
 ## Architecture notes
 
 - Policies are used for all invitation and short URL access rules.
-- `App\Services\ShortUrlService` generates unique short url by using bitly
+- `App\Services\ShortUrlService` generates unique short url
 - The `InviteUserRequest` and `StoreShortUrlRequest` objects validate requests and authorize operations.
 - Role seeding and a raw SQL SuperAdmin insertion are implemented in database seeders.

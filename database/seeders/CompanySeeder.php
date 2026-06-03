@@ -9,11 +9,11 @@ class CompanySeeder extends Seeder
 {
     public function run(): void
     {
-        Company::factory()->create([
-            'name' => 'Sembark Tech Private Limited',
-            'name' => 'Todquest Enterprises Private Limited',
-            'name' => 'Webkul Software Private Limited',
-            'name' => 'Incapp Technologies Private Limited',
-        ]);
+        Company::factory()->count(4)->sequence(
+            ['name' => 'Sembark Tech Private Limited'],
+            ['name' => 'Todquest Enterprises Private Limited'],
+            ['name' => 'Webkul Software Private Limited'],
+            ['name' => 'Incapp Technologies Private Limited'],
+        )->create();
     }
 }

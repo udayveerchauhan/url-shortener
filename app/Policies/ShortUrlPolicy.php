@@ -33,7 +33,7 @@ class ShortUrlPolicy
 
     public function create(User $user): bool
     {
-        return $user->hasRole('Member');
+        return $user->hasRole(['Member','Admin']);
     }
 
     public function delete(User $user, ShortUrl $shortUrl): bool

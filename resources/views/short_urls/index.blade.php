@@ -26,7 +26,7 @@
             <tbody class="divide-y divide-slate-200 bg-white">
                 @forelse($shortUrls as $shortUrl)
                     <tr class="hover:bg-slate-50 transition">
-                        <td class="px-6 py-4 text-sm font-mono text-sky-600 font-semibold">{{ $shortUrl->short_code }}</td>
+                        <td class="px-6 py-4 text-sm font-mono text-sky-600 font-semibold"><a href="{{ route('short-urls.redirect', $shortUrl->short_code) }}" target="_blank" rel="noopener noreferrer">{{ $shortUrl->short_code }}</a></td>
                         <td class="px-6 py-4 text-sm text-slate-600 break-words max-w-md">{{ Str::limit($shortUrl->original_url, 50) }}</td>
                         <td class="px-6 py-4 text-sm text-slate-700">{{ $shortUrl->company->name }}</td>
                         <td class="px-6 py-4 text-sm text-slate-600">{{ $shortUrl->user->name }}</td>

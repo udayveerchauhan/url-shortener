@@ -57,4 +57,13 @@ class ShortUrlController extends Controller
         return redirect()->route('short-urls.index')
             ->with('success', 'Short URL deleted successfully.');
     }
+
+    public function redirect(string $shortCode)
+    {
+        $shortUrl = ShortUrl::where('short_code', $shortCode)->firstOrFail();
+        if ($shortUrl->original_url === null) {
+            abort(404);
+        }
+        return redirect()->away($shortUrl->original_url);
+    }
 }

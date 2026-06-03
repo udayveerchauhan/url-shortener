@@ -10,31 +10,13 @@ use GuzzleHttp\Client;
 
 class ShortUrlService
 {
-    public function generateCode(string $originalUrl): string
+    public function generateCode(): string
     {
-        try {
-            $client = new Client();
-            // dd('Bearer ' . env('BITLY_API_KEY'));
-            $response = $client->post(
-                'https://api-ssl.bitly.com/v4/shorten',
-                [
-                    'headers' => [
-                        'Authorization' => 'Bearer ' . env('BITLY_API_KEY'),
-                        'Content-Type'  => 'application/json',
-                    ],
-                    'json' => [
-                        'long_url' => $originalUrl,
-                    ],
-                ]
-            );
+        do {
+            $code = Str::random(6);
+        } while (ShortUrl::where('short_code', $code)->exists());
 
-            $result = json_decode($response->getBody(), true);
-            // dd($result);
-            return $result['link'];
-        } catch (\Exception $e) {
-            \Log::info('Getting issue when generating short URL for ' . $originalUrl . ' at ' . now());
-            throw new \Exception($e->getMessage());
-        }
+        return $code;
     }
 
     public function createShortUrl(User $user, string $originalUrl): ShortUrl
@@ -47,7 +29,7 @@ class ShortUrlService
             'company_id' => $user->company_id,
             'user_id' => $user->id,
             'original_url' => $originalUrl,
-            'short_code' => $this->generateCode($originalUrl),
+            'short_code' => $this->generateCode(),
         ]);
     }
 }
